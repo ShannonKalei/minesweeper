@@ -1,17 +1,11 @@
 body {
-  margin: 20px;
-  font-family: sans-serif;
   background-color: #eee;
+  font-family: sans-serif;
+  margin: 20px;
 }
 
 select {
   text-align: center;
-}
-
-.info {
-  padding-right: 2px;
-  display: inline-block;
-  margin: 2px;
 }
 
 .clear {
@@ -26,10 +20,6 @@ select {
   text-align: center;
 }
 
-.game-info {
-  min-height: 40px;
-}
-
 .game-board-container {
   border: 6px solid rgb(255, 220, 255);
   border-radius: 10px;
@@ -42,23 +32,22 @@ select {
   background: linear-gradient(135deg, rgb(255, 255, 255), rgb(255, 220, 255));
   border: 1px solid #4444;
   border-radius: 2px;
+  box-sizing: border-box;
   color: rgba(0, 0, 0, 1);
+  cursor: pointer;
   float: left;
   font-size: 24px;
   line-height: 34px;
   height: 1.75em;
-  text-align: center;
   width: 1.75em;
-  box-sizing: border-box;
-  cursor: pointer;
   padding: 2px;
   opacity: 1;
+  text-align: center;
   transition: opacity 0.8s cubic-bezier(0.33, 1, 0.68, 1);
 }
 
-.hidden {
-  background: #dcd;
-  opacity: 0.6;
+.game-info {
+  min-height: 40px;
 }
 
 .game-f {
@@ -69,3 +58,13 @@ select {
   color: #f00;
 }
 
+.hidden {
+  background: #dcd;
+  opacity: 0.6;
+}
+
+.info {
+  display: inline-block;
+  margin: 2px;
+  padding-right: 2px;
+}

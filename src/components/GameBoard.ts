@@ -1,4 +1,4 @@
-import { generateMineNeighbors, traverseBoard } from "../utils/BoardUtils";
+import { generateMineNeighbors } from "../utils/BoardUtils";
 
 export default class GameBoard {
   grid: any[][];
@@ -48,8 +48,6 @@ export default class GameBoard {
   }
 
   private randomInt(size: number, protectedInt?: number) {
-    // TODO check this
-    // return Math.floor(Math.random() * size); ??
     let randomNumber = Math.floor((Math.random() * 1000) + 1) % size;
     while(randomNumber === protectedInt) {
       randomNumber = Math.floor((Math.random() * 1000) + 1) % size;
