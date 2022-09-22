@@ -63,20 +63,20 @@ function getMines(grid: any[][]) {
 
 function traverseBoard(x: number, y: number, grid: any[][]) {
   const values = [];
-  if (x > 0) { // Cells above
-    values.push(grid[x - 1][y]);
-    if (y > 0) values.push(grid[x - 1][y - 1]);
-    if (y < grid[0].length - 1) values.push(grid[x - 1][y + 1]);
+  if (y > 0) { // Cells above
+    values.push(grid[y - 1][x]);
+    if (x > 0) values.push(grid[y - 1][x - 1]);
+    if (x < grid[0].length - 1) values.push(grid[y - 1][x + 1]);
   }
 
-  if (x < grid.length - 1) { // Cells below
-    values.push(grid[x + 1][y]);
-    if (y > 0) values.push(grid[x + 1][y - 1]);
-    if (y < grid[0].length - 1) values.push(grid[x + 1][y + 1]);
+  if (y < grid.length - 1) { // Cells below
+    values.push(grid[y + 1][x]);
+    if (x > 0) values.push(grid[y + 1][x - 1]);
+    if (x < grid[0].length - 1) values.push(grid[y + 1][x + 1]);
   }
 
-  if (y > 0) values.push(grid[x][y - 1]); // Cell left
-  if (y < grid[0].length - 1) values.push(grid[x][y + 1]); // Cell right
+  if (x > 0) values.push(grid[y][x - 1]); // Cell left
+  if (x < grid[0].length - 1) values.push(grid[y][x + 1]); // Cell right
 
   return values;
 }

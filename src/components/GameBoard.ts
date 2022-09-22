@@ -15,8 +15,8 @@ export default class GameBoard {
       gridData.push([null]);
       for (let j = 0; j < width; j++) {
         gridData[i][j] = {
-          x: i,
-          y: j,
+          x: j,
+          y: i,
           isMine: false,
           neighbour: 0,
           isRevealed: false,
@@ -25,7 +25,6 @@ export default class GameBoard {
         };
       }
     }
-
     gridData = this.createMines(gridData, height, width, mines, protectedX, protectedY);
     gridData = generateMineNeighbors(gridData, height, width);
 
@@ -34,12 +33,11 @@ export default class GameBoard {
 
   private createMines(grid: any[][], height: number, width: number, mines: number, protectedX?: number, protectedY?: number) {
     let randomx, randomy, minesCreated = 0;
-
     while (minesCreated < mines) {
         randomx = this.randomInt(width, protectedX);
         randomy = this.randomInt(height, protectedY);
-        if (!(grid[randomx][randomy].isMine)) {
-            grid[randomx][randomy].isMine = true;
+        if (!grid[randomy][randomx].isMine) {
+            grid[randomy][randomx].isMine = true;
             minesCreated++;
         }
     }

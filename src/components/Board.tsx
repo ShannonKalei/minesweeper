@@ -38,7 +38,7 @@ export default class Board extends React.Component<any, any> {
     }
   }
 
-  createNewBoard(width: number, height: number, mines: number) {
+  createNewBoard(height: number, width: number, mines: number) {
     this.setState({
       boardData: new GameBoard(height, width, mines),
       gameWon: false,
@@ -64,8 +64,8 @@ export default class Board extends React.Component<any, any> {
     let area = traverseBoard(x, y, data);
     area.forEach((value) => {
       if (!value.isRevealed && (value.isEmpty || !value.isMine)) {
-        data[value.x][value.y].isRevealed = true;
-        data[value.x][value.y].isFlagged = false;
+        data[value.y][value.x].isRevealed = true;
+        data[value.y][value.x].isFlagged = false;
         if (value.isEmpty) this.revealEmpty(value.x, value.y, data, flagsToRemove);
       }
     });
@@ -81,7 +81,7 @@ export default class Board extends React.Component<any, any> {
   }
 
   activateCell(x: number, y: number) {
-    const selectedCell = this.state.boardData.grid[x][y];
+    const selectedCell = this.state.boardData.grid[y][x];
     if (selectedCell.isRevealed) return null;
     if (this.state.moveCount === 0 && selectedCell.isMine) {
       this.swapMineWithEmpty(x, y);
@@ -94,9 +94,9 @@ export default class Board extends React.Component<any, any> {
     if (selectedCell.isMine) this.revealBoard();
 
     let updatedData = this.state.boardData;
-    updatedData.grid[x][y].isRevealed = true;
+    updatedData.grid[y][x].isRevealed = true;
 
-    if (updatedData.grid[x][y].isEmpty) {
+    if (updatedData.grid[y][x].isEmpty) {
       updatedData.grid = this.revealEmpty(x, y, updatedData.grid);
     }
 
@@ -105,7 +105,7 @@ export default class Board extends React.Component<any, any> {
       win = true;
       this.revealBoard();
     } else {
-      updatedData.grid[x][y].isFlagged = false;
+      updatedData.grid[y][x].isFlagged = false;
     }
 
     const flagCount = getFlags(updatedData.grid).length;
@@ -115,18 +115,18 @@ export default class Board extends React.Component<any, any> {
 
   tagCell(x: number, y: number) {
     let updatedData = this.state.boardData;
-    if (updatedData.grid[x][y].isRevealed) return;
+    if (updatedData.grid[y][x].isRevealed) return;
 
     let mineCount = this.state.mineCount;
     let flagCount = this.state.flagCount;
     let win = false;
 
-    if (updatedData.grid[x][y].isFlagged) {
-      updatedData.grid[x][y].isFlagged = false;
+    if (updatedData.grid[y][x].isFlagged) {
+      updatedData.grid[y][x].isFlagged = false;
       flagCount--;
       mineCount++;
     } else {
-      updatedData.grid[x][y].isFlagged = true;
+      updatedData.grid[y][x].isFlagged = true;
       flagCount++;
       mineCount--;
     }

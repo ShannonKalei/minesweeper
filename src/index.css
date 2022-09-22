@@ -4,6 +4,10 @@ body {
   margin: 20px;
 }
 
+input {
+  margin-right: 12px;
+}
+
 select {
   text-align: center;
 }
@@ -63,8 +67,12 @@ select {
   opacity: 0.6;
 }
 
-.info {
-  display: inline-block;
-  margin: 2px;
+.level-selection {
+
+  margin: 10px 2px;
   padding-right: 2px;
+}
+
+.level-selection-custom-input-fields {
+  margin: 5px;
 }
