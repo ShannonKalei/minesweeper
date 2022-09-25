@@ -32,24 +32,39 @@ export default class GameBoard {
   }
 
   private createMines(grid: any[][], height: number, width: number, mines: number, protectedX?: number, protectedY?: number) {
-    let randomx, randomy, minesCreated = 0;
-    while (minesCreated < mines) {
-        randomx = this.randomInt(width, protectedX);
-        randomy = this.randomInt(height, protectedY);
-        if (!grid[randomy][randomx].isMine) {
-            grid[randomy][randomx].isMine = true;
+    let randomX, randomY; 
+    let minesCreated = 0;
+    let tries = 0;
+    while (minesCreated < mines && tries < mines * 2) {
+        randomX = this.randomInt(width, protectedX);
+        randomY = this.randomInt(height, protectedY);
+        if (!grid[randomY][randomX].isMine) {
+            grid[randomY][randomX].isMine = true;
             minesCreated++;
         }
+        tries++
+    }
+    if (tries >= mines * 1.5 && minesCreated < mines) {
+      for(let i=0; i < height; i++) {
+        for (let j = 0; j < width; j++) {
+          if (i === protectedY && j === protectedX) continue;
+          if (minesCreated >= mines) return grid;
+          if (!grid[i][j].isMine) {
+            grid[i][j].isMine = true;
+            minesCreated++;
+          }
+        }
+      }
     }
   
     return grid;
   }
 
   private randomInt(size: number, protectedInt?: number) {
-    let randomNumber = Math.floor((Math.random() * 1000) + 1) % size;
-    while(randomNumber === protectedInt) {
-      randomNumber = Math.floor((Math.random() * 1000) + 1) % size;
-    }
+    let randomNumber = Math.round(Math.random() * (size - 1));
+      while(randomNumber === protectedInt) {
+        randomNumber = Math.round(Math.random() * (size - 1));
+      }
     return randomNumber;
   }
 }

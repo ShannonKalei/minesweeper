@@ -47,7 +47,8 @@ export default class LevelSelect extends React.Component<{
   //TODO: clean up handling of custom inputs & handle NaN
   handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const id = e.target.id;
-    let value = parseInt(e.target.value);
+    let value: number | string = parseInt(e.target.value);
+    if (isNaN(value)) value = '';
     switch(id) {
       case "custom-height":
         this.setState({ height: value }, () => this.validateInput(id, value));
@@ -64,21 +65,25 @@ export default class LevelSelect extends React.Component<{
   }
 
   debounceTimer = setTimeout(() => {});
-  validateInput(id: string, value: number) {
+  validateInput(id: string, value: number | string) {
     clearTimeout(this.debounceTimer);  
+    if (typeof value !== 'number') return;
+    let val = 0;
+    if (typeof value === 'number') val = value;
     this.debounceTimer = setTimeout(() => {      
       switch(id) {
         case "custom-height":
-          value = Math.min(Math.max(value, this.state.minHeight), this.state.maxHeight);
-          this.setState({ height: value });
+          val = Math.min(Math.max(val, this.state.minHeight), this.state.maxHeight);
+          this.setState({ height: val });
           break;
         case "custom-width":
-          value = Math.min(Math.max(value, this.state.minWidth), this.state.maxWidth);
-          this.setState({ width: value });
+          val = Math.min(Math.max(val, this.state.minWidth), this.state.maxWidth);
+          this.setState({ width: val });
+
           break;
         case "custom-mines":
-          value = Math.min(Math.max(value, this.state.minMines), this.state.maxMines);
-          this.setState({ mines: value });
+          val = Math.min(Math.max(val, this.state.minMines), this.state.maxMines);
+          this.setState({ mines: val });
           break;
         default:
           break;
@@ -87,7 +92,29 @@ export default class LevelSelect extends React.Component<{
   }
 
   requestGameStart = () => {
-    this.props.handleGameStart(this.state.height, this.state.width, this.state.mines);
+    let height = this.state.height;
+    let width = this.state.width;
+    let mines = this.state.mines;
+    if (typeof this.state.height !== 'number') {
+      height = this.state.minHeight;
+      this.setState({ height });
+    }
+    if (typeof this.state.width !== 'number') {
+      width = this.state.minWidth;
+      this.setState({ width });
+    }
+    
+    if (typeof this.state.mines !== 'number') {
+      mines = this.state.minMines;
+      this.setState({ mines });
+    }  
+    const size = width * height;  
+    if (size <= mines) {
+      mines = size - 2;
+      this.setState({ mines });
+    }
+    
+    this.props.handleGameStart(height, width, mines);
   }
 
   render() {
