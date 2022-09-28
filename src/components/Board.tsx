@@ -7,6 +7,7 @@ export default class Board extends React.Component<any, any> {
   state = {
     boardData: new GameBoard(this.props.height, this.props.width, this.props.mines),
     gameWon: false,
+    gameLost: false,
     flagCount: 0,
     mineCount: this.props.mines,
     moveCount: 0,
@@ -42,6 +43,7 @@ export default class Board extends React.Component<any, any> {
     this.setState({
       boardData: new GameBoard(height, width, mines),
       gameWon: false,
+      gameLost: false,
       flagCount: 0,
       mineCount: mines,
       moveCount: 0,
@@ -91,7 +93,11 @@ export default class Board extends React.Component<any, any> {
     const moves = this.state.moveCount + 1;
     this.setState({ moveCount: moves });
 
-    if (selectedCell.isMine) this.revealBoard();
+    let gameLost = false;
+    if (selectedCell.isMine) {
+      gameLost = true;
+      this.revealBoard();
+    }
 
     let updatedData = this.state.boardData;
     updatedData.grid[y][x].isRevealed = true;
@@ -100,9 +106,9 @@ export default class Board extends React.Component<any, any> {
       updatedData.grid = this.revealEmpty(x, y, updatedData.grid);
     }
 
-    let win = false;
+    let gameWon = false;
     if (getHiddenCells(updatedData.grid).length === this.props.mines) {
-      win = true;
+      gameWon = true;
       this.revealBoard();
     } else {
       updatedData.grid[y][x].isFlagged = false;
@@ -110,7 +116,7 @@ export default class Board extends React.Component<any, any> {
 
     const flagCount = getFlags(updatedData.grid).length;
     const mineCount = this.props.mines - flagCount;
-    this.setState({ boardData: updatedData, mineCount, gameWon: win, flagCount });
+    this.setState({ boardData: updatedData, mineCount, gameWon, gameLost, flagCount });
   }
 
   tagCell(x: number, y: number) {
@@ -145,7 +151,7 @@ export default class Board extends React.Component<any, any> {
     this.activateCell(x, y);
   }
 
-  handleKeyboardEvent(x: number, y: number, e: React.KeyboardEvent<HTMLInputElement>) {
+  handleKeyboardEvent(e: React.KeyboardEvent<HTMLInputElement>, x: number, y: number) {
     if (e.key !== "Enter") return;
     if (!e.shiftKey) {
       this.activateCell(x, y);
@@ -175,7 +181,7 @@ export default class Board extends React.Component<any, any> {
               <Cell value={item}
                 onClick={() => this.handleCellClick(item.x, item.y)}
                 onKeyboardEvent={(e: React.KeyboardEvent<HTMLInputElement>) =>
-                  this.handleKeyboardEvent(item.x, item.y, e)
+                  this.handleKeyboardEvent(e, item.x, item.y)
                 }
                 cMenu={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
                   this.handleContextMenu(e, item.x, item.y)
@@ -192,14 +198,14 @@ export default class Board extends React.Component<any, any> {
   render() {
     return (
       <div className="board">
-        <div className="game-info">
-          <span className="info">Total Mines: {this.props.mines}</span>
-          <br />
-          <span className="info">Flags In-Use: {this.state.flagCount}</span>
-          <br />
-          <span className="info">Moves Taken: {this.state.moveCount}</span>
-          <br />
-          <span className="info">{this.state.gameWon ? "You Win" : ""}</span>
+        <div className="game-info-stats">
+          <span className="game-info-item">Total Mines: {this.props.mines}</span>
+          <span className="game-info-item">Flags In-Use: {this.state.flagCount}</span>
+          <span className="game-info-item">Moves Taken: {this.state.moveCount}</span>
+        </div>
+        <div className="game-info-result">
+          <span className="game-info-win">{this.state.gameWon ? "You Win 😎" : ""}</span>
+          <span className="game-info-win">{this.state.gameLost ? "You Lose 🙁" : ""}</span>
         </div>
         <div className="game-board-container" style={this.gameBoardStyle}>
           <div>{this.renderBoard(this.state.boardData.grid)}</div>

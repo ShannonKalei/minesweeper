@@ -1,15 +1,26 @@
 body {
   background-color: #eee;
   font-family: sans-serif;
-  margin: 20px;
+  margin: 10px;
+}
+
+h2 {
+  font-size: 1em;
+  margin-block-end: 0.5em;
+  margin-block-start: 0.7em;
 }
 
 input {
-  margin-right: 12px;
+  margin-right: 8px;
+}
+
+label {
+  margin-left: 8px;
 }
 
 select {
   text-align: center;
+  margin-right: 8px;
 }
 
 .clear {
@@ -29,7 +40,7 @@ select {
   border-radius: 10px;
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.5);
   font-size: 100%;
-  margin: 10px auto;
+  margin: 2px auto 32px;
 }
 
 .game-board-cell {
@@ -50,8 +61,21 @@ select {
   transition: opacity 0.8s cubic-bezier(0.33, 1, 0.68, 1);
 }
 
-.game-info {
-  min-height: 40px;
+.game-info-stats {
+  min-height: 20px;
+}
+
+.game-info-result {
+  min-height: 30px;
+}
+
+.game-info-item {
+  margin: 20px;
+}
+
+.game-info-win {
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .game-f {
@@ -68,11 +92,23 @@ select {
 }
 
 .level-selection {
-
-  margin: 10px 2px;
-  padding-right: 2px;
+  background: #e4e4e4;
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 4px 0px rgba(0, 0, 0, 0.5);
+  width: max-content;
+  display: inline-block;
+  padding: 4px;
 }
 
-.level-selection-custom-input-fields {
+.level-selection-predefined,
+.level-selection-custom {
+  margin: 12px 4px;
+}
+
+.level-selection-custom-input-fields-container {
   margin: 5px;
+}
+
+.level-selection-custom-input-fields-textbox {
+  width: 40px;
 }

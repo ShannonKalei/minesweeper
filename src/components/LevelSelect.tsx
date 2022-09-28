@@ -7,15 +7,16 @@ export default class LevelSelect extends React.Component<{
     height: 8,
     width: 8,
     mines: 10,
-    maxHeight: 20,
-    maxWidth: 40,
-    maxMines: 50,
-    minHeight: 2,
-    minWidth: 2,
-    minMines: 1,
     newGameRequested: false,
     debounce: false
   };
+
+  minHeight = 2;
+  minWidth = 2;
+  minMines = 1;
+  maxHeight = 20;
+  maxWidth = 40;
+  maxMines = 500;
 
   handleLevelSelect = () => {
     let size = document.querySelector("#board_size_select") as HTMLInputElement;
@@ -44,7 +45,6 @@ export default class LevelSelect extends React.Component<{
     }, () => this.requestGameStart());    
   };
 
-  //TODO: clean up handling of custom inputs & handle NaN
   handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const id = e.target.id;
     let value: number | string = parseInt(e.target.value);
@@ -73,16 +73,15 @@ export default class LevelSelect extends React.Component<{
     this.debounceTimer = setTimeout(() => {      
       switch(id) {
         case "custom-height":
-          val = Math.min(Math.max(val, this.state.minHeight), this.state.maxHeight);
+          val = Math.min(Math.max(val, this.minHeight), this.maxHeight);
           this.setState({ height: val });
           break;
         case "custom-width":
-          val = Math.min(Math.max(val, this.state.minWidth), this.state.maxWidth);
+          val = Math.min(Math.max(val, this.minWidth), this.maxWidth);
           this.setState({ width: val });
-
           break;
         case "custom-mines":
-          val = Math.min(Math.max(val, this.state.minMines), this.state.maxMines);
+          val = Math.min(Math.max(val, this.minMines), this.maxMines);
           this.setState({ mines: val });
           break;
         default:
@@ -96,16 +95,16 @@ export default class LevelSelect extends React.Component<{
     let width = this.state.width;
     let mines = this.state.mines;
     if (typeof this.state.height !== 'number') {
-      height = this.state.minHeight;
+      height = this.minHeight;
       this.setState({ height });
     }
     if (typeof this.state.width !== 'number') {
-      width = this.state.minWidth;
+      width = this.minWidth;
       this.setState({ width });
     }
     
     if (typeof this.state.mines !== 'number') {
-      mines = this.state.minMines;
+      mines = this.minMines;
       this.setState({ mines });
     }  
     const size = width * height;  
@@ -122,29 +121,34 @@ export default class LevelSelect extends React.Component<{
       <div>
         <div className="level-selection">
           <div className='level-selection-predefined'>
+            <h2>Default Boards</h2>
             <select id="board_size_select" defaultValue={"8x8"}>
-              <option value="5x5">5x5; 5x💣</option>
-              <option value="8x8">8x8; 10x💣</option>
-              <option value="12x12">12x12; 20x💣</option>
-              <option value="16x16">16x16; 40x💣</option>
+              <option value="5x5">5x5, 5 mines</option>
+              <option value="8x8">8x8, 10 mines</option>
+              <option value="12x12">12x12, 20 mines</option>
+              <option value="16x16">16x16, 40 mines</option>
             </select>
             <button onClick={this.handleLevelSelect}>Create New Board</button>
           </div>
           <div className="level-selection-custom">
-            <div className='level-selection-custom-input-fields'>
+            <h2>Custom Board</h2>
+            <div className='level-selection-custom-input-fields-container'>
               <label htmlFor="custom-height">Height: </label>
-              <input 
-                id="custom-height" name="custom height" type="number" min={1} max={this.state.maxHeight} pattern="[0-9]"
+              <input className='level-selection-custom-input-fields-textbox'
+                id="custom-height" name="custom height" type="number" min={1} max={this.maxHeight} pattern="[0-9]"
+                title={`Input a number between ${this.minHeight} and ${this.maxHeight}`}
                 value={this.state.height} onChange={this.handleChange.bind(this)}
               />
               <label htmlFor="custom-width">Width: </label>
-              <input 
-                id="custom-width" name="custom width" type="number" min={1} max={this.state.maxWidth} pattern="[0-9]"
+              <input className='level-selection-custom-input-fields-textbox'
+                id="custom-width" name="custom width" type="number" min={1} max={this.maxWidth} pattern="[0-9]"
+                title={`Input a number between ${this.minWidth} and ${this.maxWidth}`}
                 value={this.state.width} onChange={this.handleChange.bind(this)}
               />
               <label htmlFor="custom-mines">Mines: </label>
-              <input 
-                id="custom-mines" name="custom mines" type="number" min={1} max={this.state.maxMines} pattern="[0-9]"
+              <input className='level-selection-custom-input-fields-textbox'
+                id="custom-mines" name="custom mines" type="number" min={1} max={this.maxMines} pattern="[0-9]"
+                title={`Input a number between ${this.minMines} and ${this.maxMines}`}
                 value={this.state.mines} onChange={this.handleChange.bind(this)}
               />
             </div>
