@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Board from "./components/Board";
 import LevelSelect from './components/LevelSelect';
+import ThemeSlider from './components/ThemeSlider';
 import "./index.css";
 
 class App extends React.Component<any, any> {
@@ -28,6 +29,8 @@ class App extends React.Component<any, any> {
       <div className="game">
         <Board height={height} width={width} mines={mines} newGameRequested={newGameRequested} />
         <LevelSelect handleGameStart={this.handleGameStart} />
+        <ThemeSlider></ThemeSlider>
+        <div id="gradient-background" className="gradient-background"></div>
       </div>
     );
   }
