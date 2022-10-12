@@ -2,6 +2,12 @@
 
 A basic minesweeper game made using React and TypeScript.
 
+# Demo
+
+Interactive demo hosted on GitHub Pages: <https://shannonkalei.github.io/minesweeper>.
+
+<img src="./docs/minesweeper.gif" alt="Example of interactive minesweeper demo" width="600">
+
 # Roadmap
 
 - Undo/redo
