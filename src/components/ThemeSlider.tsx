@@ -45,7 +45,7 @@ export default function ThemeSlider() {
       systemPref = 'light'
     } 
   }
-  active = useColorSchemeState(systemPref);
+  active = useColorSchemeState(systemPref)[0];
   const [ prevTheme, setPrevTheme ] = useState(systemPrefersDark ? 'dark' : 'light');
   const [ activeTheme, setActiveTheme ] = useColorSchemeState(active);
 
