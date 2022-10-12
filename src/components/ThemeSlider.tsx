@@ -75,10 +75,10 @@ export default function ThemeSlider() {
       document.body.classList.remove(prevTheme);
       timerId = setTimeout(() => {
         gradient.classList.add('gradient-background-on');
-      }, 2000);
+      }, 1500);
       
     }
-  }, [activeTheme]);
+  }, [activeTheme, prevTheme]);
 
   function getColorThemeKey(object: { [key: string]: string }, value: any) {
     return Object.keys(object).find(key => object[key] === value);
