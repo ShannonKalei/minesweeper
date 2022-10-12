@@ -32,9 +32,9 @@ body {
 }
 
 .sakura {
-  --color-background: #ffabda;
-  --color-button: #ffabda;
-  --color-gradient: #ffc0d9;
+  --color-background: #ffcae7;
+  --color-button: #ffaedb;
+  --color-gradient: #ffd2e4;
   --color-cell-font: #000;
   --color-cell-border: #4444;
   --color-cell-hidden: #e9cddc;
@@ -46,9 +46,9 @@ body {
 }
 
 .maple {
-  --color-background: #ff5f5f;
-  --color-button: #ff5f5f;
-  --color-gradient: #ff8364;
+  --color-background: #ffa5a5;
+  --color-button: #ff7474;
+  --color-gradient: #ff9a80;
   --color-cell-font: #000;
   --color-cell-border: #4444;
   --color-cell-hidden: #f1b7b7;
@@ -60,9 +60,9 @@ body {
 }
 
 .carrot {
-  --color-background: #ff8142;
-  --color-button: #ff8142;
-  --color-gradient: #fe9e63;
+  --color-background: #ffb088;
+  --color-button: #ff9a67;
+  --color-gradient: #ffb688;
   --color-cell-font: #000;
   --color-cell-border: #4444;
   --color-cell-hidden: #e7ccc3;
@@ -74,9 +74,9 @@ body {
 }
 
 .sun {
-  --color-background: #ffd13a;
-  --color-button: #ffd13a;
-  --color-gradient: #ffd27f;
+  --color-background: #ffe388;
+  --color-button: #ffcf5f;
+  --color-gradient: #ffe0a7;
   --color-cell-font: #000;
   --color-cell-border: #4444;
   --color-cell-hidden: #e9d2b5;
@@ -88,9 +88,9 @@ body {
 }
 
 .turtle {
-  --color-background: #8dde42;
-  --color-button: #abf367;
-  --color-gradient: #cee867;
+  --color-background: #c8ff94;
+  --color-button: #8cdd40;
+  --color-gradient: #def485;
   --color-cell-font: #000;
   --color-cell-border: #4444;
   --color-cell-hidden: #dde9b5;
@@ -102,9 +102,9 @@ body {
 }
 
 .water {
-  --color-background: #27dbff;
-  --color-button: #27dbff;
-  --color-gradient: #6bf6fd;
+  --color-background: #8becff;
+  --color-button: #49e2fd;
+  --color-gradient: #9cfff7;
   --color-cell-font: #000;
   --color-cell-border: #4444;
   --color-cell-hidden: #fff;
@@ -116,9 +116,9 @@ body {
 }
 
 .grape {
-  --color-background: #5000b9;
-  --color-button: #5000b9;
-  --color-gradient: #6e26cc;
+  --color-background: #7138bb;
+  --color-button: #3b0083;
+  --color-gradient: #8a59cb;
   --color-cell-font: #fff;
   --color-cell-border: #4447;
   --color-cell-hidden: #9a8faf;
@@ -126,13 +126,13 @@ body {
   --color-cell-revealed-gradient-end: #3b0083;
   --color-flag-outline: #f00;
   --color-board-outline: #3b0083;
-  --color-level-selection: #814dd6;
+  --color-level-selection: #7d56bc;
 }
 
 .dark {
   --color-background: #313131;
   --color-button: #252525;
-  --color-gradient: #494949;
+  --color-gradient: #444444;
   --color-cell-font: #fff;
   --color-cell-border: #333;
   --color-cell-hidden: #545454;
@@ -140,7 +140,7 @@ body {
   --color-cell-revealed-gradient-end: #252525;
   --color-flag-outline: #ff6464;
   --color-board-outline: #252525;
-  --color-level-selection: #464646;
+  --color-level-selection: #494949;
 }
 
 h2 {
