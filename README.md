@@ -8,6 +8,8 @@ Interactive demo hosted on GitHub Pages: <https://shannonkalei.github.io/mineswe
 
 <img src="./docs/minesweeper.gif" alt="Example of interactive minesweeper demo" width="600">
 
+<img src="./docs/minesweeper-color-themes.gif" alt="Example of color theme options" width="600">
+
 # Roadmap
 
 - Undo/redo
